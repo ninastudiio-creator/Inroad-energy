@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1a2e" />
+  <title>Inroad Energy — Clean Energy Project Developer</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <style>
+    /* ─── ARCHIVO — self-hosted variable font (300–700) ─── */
+    @font-face {
+      font-family: 'Archivo';
+      src: url('fonts/archivo-var.woff2') format('woff2');
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1B2A4A;
+      --stone:     #FAF7F1;
+      --pipeline:  #FCB504;
+      --hydro:     #2B6ED4;
+      --concrete:  #E8E5E0;
+      --gray-text: #6E6C66;
+      --pad-x:     100px;
+    }
+
+    html { overflow-x: clip; scroll-behavior: smooth; background: #0f1a2e; overscroll-behavior: none; }
+
+    body {
+      font-family: 'Archivo', sans-serif;
+      background-color: var(--stone);
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SECTION TAG ─────────────────────────────────── */
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      margin-bottom: 20px;
+    }
+    .section-tag::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--hydro);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    nav.scrolled {
+      background: rgba(250, 247, 241, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--concrete);
+    }
+    .nav-inner {
+      padding: 0 60px;
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: auto; width: auto; max-height: 96px; display: block; transition: filter 0.4s ease; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 0; height: 1.5px;
+      background: currentColor;
+      transition: width 0.28s ease;
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .btn-nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff !important;
+      background: var(--navy);
+      padding: 10px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.25s ease, background 0.3s ease, color 0.3s ease;
+    }
+    .btn-nav-cta::after { display: none !important; }
+    .btn-nav-cta:hover { transform: scale(1.03); }
+    .btn-arrow {
+      width: 18px; height: 18px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.25s ease;
+    }
+    .btn-nav-cta:hover .btn-arrow { transform: rotate(45deg); }
+
+    /* Nav over dark hero */
+    nav.over-hero .nav-links a { color: rgba(250,247,241,0.85); }
+    nav.over-hero .nav-logo img { filter: brightness(0) invert(1); }
+    nav.over-hero .btn-nav-cta {
+      background: var(--stone);
+      color: var(--navy) !important;
+      border: none;
+    }
+    nav.over-hero .btn-nav-cta .btn-arrow { filter: none; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #0f1a2e;
+      padding: 0 !important;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+    }
+    .hero-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,15,30,0.55) 0%, rgba(10,15,30,0.15) 40%, rgba(10,15,30,0.55) 100%);
+    }
+    .hero-navy-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--navy);
+      opacity: 0.10;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      padding: 0 var(--pad-x) 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero-line-wrap {
+      overflow: hidden;
+      display: block;
+    }
+    .hero-line {
+      display: block;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .hero-line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(250,247,241,0.65);
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--hydro);
+      display: inline-block;
+    }
+    h1 {
+      font-family: 'Archivo', sans-serif;
+      font-size: clamp(30px, 4vw, 64px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--stone);
+      max-width: 1100px;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-size: clamp(15px, 1.4vw, 19px);
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(250,247,241,0.65);
+      max-width: 520px;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── SECTIONS ────────────────────────────────────── */
+    section { padding: 100px var(--pad-x); }
+
+    /* ─── SCROLL TEXT PANELS ──────────────────────────── */
+    .text-scroll-driver {
+      height: 230vh;
+      margin-bottom: -40px;
+    }
+    .text-scroll-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      align-content: center;
+      padding: 88px var(--pad-x) 0;
+      overflow: hidden;
+      gap: 60px;
+    }
+    .text-panels-wrap {
+      position: relative;
+      height: 320px;
+    }
+    .text-panel {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      will-change: transform, opacity;
+    }
+    /* Panel 2 is taller than panel 1; this lifts its block slightly above dead
+       centre so it reads level with the graphic. Padding (not transform) — the
+       scroll script owns the inline transform. */
+    #text-panel-2 { padding-bottom: 40px; }
+
+    .energy-canvas-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -30px;
+    }
+    #energy-canvas {
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+    }
+    .panel-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      margin-bottom: 20px;
+      height: 20px;
+    }
+    .panel-eyebrow-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--hydro);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .opp-heading {
+      font-size: clamp(30px, 3.2vw, 46px);
+      font-weight: 600;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      max-width: 780px;
+    }
+    .opp-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--navy);
+      opacity: 0.65;
+      max-width: 640px;
+    }
+
+
+    /* ─── CONVICTION ─────────────────────────────────── */
+    #conviction {
+      padding: 122px var(--pad-x) 178px;
+      background: var(--navy);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #conviction::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('section-bg-blue.jpg') center 70%/cover no-repeat;
+      opacity: 0.09;
+      pointer-events: none;
+    }
+    #conviction .section-tag {
+      color: rgba(250,247,241,0.6);
+      justify-content: center;
+    }
+    .conviction-text {
+      font-size: clamp(28px, 2.4vw, 34px);
+      font-weight: 400;
+      line-height: 1.5;
+      max-width: 760px;
+      margin: 0 auto;
+      /* 0.55 keeps the unlit state readable (5.1:1 on navy) before it lights up */
+      color: rgba(250,247,241,0.55);
+    }
+    .conviction-word {
+      display: inline;
+      transition: color 0.25s ease;
+    }
+    .conviction-word.lit {
+      color: var(--stone);
+    }
+    .conviction-word--yellow.lit {
+      color: var(--pipeline);
+    }
+    .conviction-word--strong { font-weight: 600; }
+
+    /* ─── WHAT WE DO ──────────────────────────────────── */
+    #what-we-do {
+      padding: 157px var(--pad-x) 70px;
+    }
+    .what-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 60px;
+    }
+    .what-header h2 {
+      font-size: clamp(34px, 3.3vw, 54px);
+      font-weight: 600;
+      line-height: 1.08;
+      margin: 16px 0 0;
+    }
+    .h2-line2 {
+      display: inline-flex;
+      align-items: center;
+    }
+    .h2-yellow-bar {
+      display: inline-block;
+      height: 2.5px;
+      background: var(--pipeline);
+      width: 0;
+      flex-shrink: 0;
+      border-radius: 2px;
+      margin-right: 0;
+      vertical-align: middle;
+      position: relative;
+      top: -2px;
+    }
+    .what-header-body {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--navy);
+      opacity: 0.65;
+      align-self: end;
+    }
+    .what-we-do-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 88px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--navy);
+      opacity: 0.65;
+      transition: opacity 0.25s;
+    }
+    .what-we-do-link:hover { opacity: 1; }
+    .what-we-do-arrow {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.25s;
+      filter: brightness(0);
+    }
+    .what-we-do-link:hover .what-we-do-arrow { transform: rotate(45deg); }
+    .process-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 56px;
+    }
+    .process-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      cursor: default;
+      transition: transform 0.3s ease;
+    }
+    .process-item:hover { transform: translateY(-5px); }
+    .process-item-dot { display: none; }
+    .process-item-num {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--gray-text);
+      margin-bottom: 12px;
+    }
+    .process-item-content { min-width: 0; }
+    .process-item-title {
+      font-size: clamp(18px, 1.8vw, 28px);
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .process-item-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(27,42,74,0.65);
+    }
+
+    /* ─── ENERGY STREAMS ──────────────────────────────── */
+    #why-now {
+      padding: 86px 0 100px;
+      background: var(--stone);
+    }
+    .why-now-inner {
+      background: var(--navy);
+      margin: 0 100px;
+      padding: 80px 94px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .why-now-heading {
+      font-size: clamp(28px, 3vw, 48px);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--stone);
+      max-width: 680px;
+      margin: 16px 0 28px;
+    }
+    .why-now-body {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--stone);
+      opacity: 0.6;
+      max-width: 880px;
+    }
+
+    #focus {
+      padding: 80px var(--pad-x) 79px;
+    }
+    .focus-header {
+      margin-bottom: 48px;
+    }
+    .focus-heading {
+      font-size: clamp(38px, 3.8vw, 54px);
+      white-space: nowrap;
+      font-weight: 600;
+      line-height: 1.08;
+      margin-top: 16px;
+    }
+    .focus-body {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--navy);
+      opacity: 0.65;
+      align-self: end;
+    }
+    .streams-note {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-top: 0;
+      max-width: 75%;
+      line-height: 1.3;
+    }
+    .streams-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .streams-item {
+      opacity: 0;
+      transform: translateY(28px);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      aspect-ratio: 3 / 4;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .streams-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .streams-item.visible:hover {
+      transform: translateY(-8px);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 24px 48px rgba(10,15,30,0.15);
+      z-index: 2;
+    }
+    .streams-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(0.6) brightness(0.75);
+      transition: filter 0.5s ease, transform 0.4s ease;
+    }
+    .streams-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(27,42,74,0.28);
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+    .streams-item:hover::after { opacity: 0; }
+    .streams-item:hover img {
+      filter: grayscale(0) brightness(1);
+      transform: scale(1.04);
+    }
+    .streams-item-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 60px 22px 22px;
+      background: linear-gradient(to top, rgba(10,15,30,0.75) 0%, transparent 100%);
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    /* ─── CLOSING CTA ─────────────────────────────────── */
+    #cta {
+      background: var(--navy);
+      padding: 58px var(--pad-x);
+    }
+    .cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+    }
+    .cta-left { flex: 1; }
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-bottom: 6px;
+    }
+    .cta-sub {
+      font-size: 17px;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      color: var(--stone);
+      opacity: 0.6;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+    .cta-headline {
+      font-size: clamp(28px, 2.8vw, 40px);
+      font-weight: 500;
+      color: var(--stone);
+      line-height: 1.0;
+    }
+    .cta-headline-link {
+      font-size: clamp(28px, 2.8vw, 40px);
+      font-weight: 500;
+      color: var(--stone);
+      line-height: 1.0;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: opacity 0.2s;
+    }
+    .cta-headline-link:hover { opacity: 0.75; }
+    .cta-arrow-img { width: 28px; height: 28px; filter: brightness(0) invert(1); transition: transform 0.25s ease; }
+    .cta-headline-link:hover .cta-arrow-img { transform: rotate(45deg); }
+    .cta-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .cta-contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--stone);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .cta-contact-item:hover { opacity: 0.75; }
+    .btn-filled {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      background: var(--stone);
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .btn-filled:hover { transform: scale(1.03); background: #fff; }
+    .btn-filled .btn-arrow {
+      width: 18px; height: 18px;
+      filter: none;
+      transition: transform 0.25s ease;
+    }
+    .btn-filled:hover .btn-arrow { transform: rotate(45deg); }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer { background: var(--navy); padding: 0px 60px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(250,247,241,0.08); }
+    .footer-logo { height: auto; width: auto; max-height: 86px; display: block; filter: brightness(0) invert(1); }
+    .footer-copy { font-size: 13px; color: rgba(250,247,241,0.6); }
+
+    /* ─── CTA background image ───────────────────────── */
+    #cta { position: relative; }
+    #cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('energy flow.jpg') center/cover no-repeat;
+      filter: grayscale(100%);
+      opacity: 0.12;
+      pointer-events: none;
+    }
+    .cta-inner { position: relative; }
+
+    /* ─── HAMBURGER ──────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 200;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
+    nav.over-hero .nav-hamburger span { background: var(--stone); }
+    nav.menu-open .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    nav.menu-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+    nav.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 160;
+      background: var(--stone);
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 40px 60px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .mobile-menu ul li a {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--navy);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--concrete);
+      transition: color 0.2s;
+    }
+    .mobile-menu ul li:last-child a { border-bottom: none; }
+    .mobile-menu ul li a:hover { color: var(--hydro); }
+    .mobile-menu-cta {
+      margin-top: 40px;
+    }
+    .mobile-menu-cta a {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--navy);
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ─── MOBILE ──────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      /* Nav collapses here: below ~1100px the 4 links + button wrap to two rows */
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+}
+
+    @media (max-width: 1024px) {
+      :root { --pad-x: 48px; }
+      .stat-item { padding: 40px 48px; }
+    }
+    @media (max-width: 860px) {
+      :root { --pad-x: 24px; }
+
+      /* Nav */
+      .nav-inner { padding: 20px 28px 0; height: 88px; }
+
+      /* Hero */
+      #hero { height: 100svh; min-height: -webkit-fill-available; }
+      h1 { font-size: 46px; }
+      .desktop-br { display: none; }
+      .hero-content { padding: 0 28px 62px; }
+
+      /* Scroll panels — sticky on mobile, canvas on top */
+      .text-scroll-driver {
+        height: 200vh;
+        margin-bottom: 0;
+        background: linear-gradient(to bottom, var(--stone) 50%, var(--navy) 72%);
+      }
+      .text-scroll-sticky {
+        position: sticky;
+        top: 0;
+        height: 100svh;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        align-items: start;
+        padding: 80px 24px 32px;
+        gap: 0;
+        overflow: hidden;
+        background: var(--stone);
+      }
+      .energy-canvas-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 24px;
+        order: -1;
+      }
+      #energy-canvas { max-width: 260px; height: auto; }
+      .text-panels-wrap { position: relative; height: 240px; }
+      .text-panel { position: absolute; top: 0; bottom: auto; left: 0; right: 0; display: block; }
+      #text-panel-2 { margin-top: 0; padding-bottom: 0; }
+
+      /* Sections padding */
+      section { padding: 60px var(--pad-x); }
+      #conviction { padding: 80px var(--pad-x); }
+
+      /* Scroll section bottom padding */
+      .text-scroll-sticky { padding-bottom: 48px; }
+
+      /* Conviction text */
+      .conviction-text { font-size: clamp(22px, 6vw, 30px); }
+
+      /* What we do */
+      .what-header { grid-template-columns: 1fr; gap: 20px; }
+      .what-header h2 { font-size: 34px; }
+      .process-items { grid-template-columns: 1fr; gap: 64px; }
+      .process-item-title { font-size: 26px; }
+
+      /* Focus */
+      .focus-header { grid-template-columns: 1fr; }
+      .focus-heading { font-size: 30px; white-space: nowrap; }
+      .streams-gallery { grid-template-columns: 1fr 1fr; gap: var(--pad-x); }
+      .streams-item { aspect-ratio: 4/3; }
+      .streams-item:hover { transform: none; box-shadow: none; }
+      .streams-item:hover::after { opacity: 1; }
+      .streams-item:hover img { filter: grayscale(0.6) brightness(0.75); transform: none; }
+
+      /* CTA */
+      .cta-inner { flex-direction: column; align-items: flex-start; gap: 40px; }
+      .cta-right { align-items: flex-start; }
+
+      /* Footer */
+      footer { flex-direction: column; gap: 20px; text-align: center; padding: 36px 24px; }
+      .footer-right { flex-direction: column; gap: 12px; }
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 38px; }
+      .opp-heading { font-size: 26px; }
+      .streams-gallery { grid-template-columns: 1fr; }
+      .streams-item { aspect-ratio: 16/9; }
+      .cta-headline { font-size: 36px; }
+    }
+  
+    /* ─── OPTICAL TAG SPACING — uniform 26px cap-to-baseline gap ─── */
+    .section-tag, .panel-eyebrow { margin-bottom: 0; }
+    .opp-heading      { margin-top: 0; }
+    #conviction .conviction-text { margin-top: calc(51.1px - 0.444em); }
+    #what-we-do .what-header h2  { margin-top: 0; }
+    .why-now-heading  { margin-top: calc(36.8px - 0.244em); }
+
+    /* ─── KEYBOARD FOCUS (WCAG 2.4.7) ─────────────────── */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--hydro);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    nav.over-hero a:focus-visible,
+    #conviction a:focus-visible,
+    #why-now a:focus-visible,
+    #cta a:focus-visible,
+    footer a:focus-visible,
+    .mobile-menu a:focus-visible {
+      outline-color: var(--pipeline);
+    }
+
+    /* ─── REDUCED MOTION (WCAG 2.2.2 / 2.3.3) ─────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      /* Looping hero video is replaced by its still poster */
+      #hero-video { display: none; }
+      #hero {
+        background: url('hero-poster.jpg') center 35%/cover no-repeat, #0f1a2e;
+      }
+      .hero-line { opacity: 1; transform: none; }
+      .streams-item { opacity: 1; transform: none; }
+      /* Conviction copy is shown fully lit rather than revealed on scroll */
+      .conviction-text { color: var(--stone); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────── -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html"><img src="logo.png" alt="Inroad Energy" /></a>
+      <ul class="nav-links">
+        <li><a href="what-we-do.html">What We Do</a></li>
+        <li><a href="who-we-work-with.html">Who We Work With</a></li>
+        <li><a href="about.html">Who We Are</a></li>
+        <li><a href="contact.html" class="btn-nav-cta">Contact Us <img class="btn-arrow" src="right-up.png" alt="" /></a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── MOBILE MENU ─────────────────────────────────── -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
+    <ul>
+      <li><a href="what-we-do.html" class="mobile-nav-link">What We Do</a></li>
+      <li><a href="who-we-work-with.html" class="mobile-nav-link">Who We Work With</a></li>
+      <li><a href="about.html" class="mobile-nav-link">Who We Are</a></li>
+    </ul>
+    <div class="mobile-menu-cta">
+      <a href="#cta" class="mobile-nav-link">Contact Us <img class="btn-arrow" src="right-up.png" alt="" style="filter:brightness(0) invert(1);width:16px;height:16px;" /></a>
+    </div>
+  </div>
+
+  <!-- ── HERO ────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-sticky">
+      <video class="hero-bg" id="hero-video" autoplay muted playsinline loop src="hero-web.mp4" poster="hero-poster.jpg"></video>
+      <div class="hero-navy-overlay"></div>
+      <div class="hero-scrim"></div>
+      <div class="hero-content">
+        <h1>
+          <span class="hero-line-wrap"><span class="hero-line">Turning wasted energy</span></span>
+          <span class="hero-line-wrap"><span class="hero-line" style="transition-delay:0.15s">into power.</span></span>
+        </h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SCROLL TEXT PANELS ── -->
+  <div class="text-scroll-driver" id="text-scroll-driver">
+    <div class="text-scroll-sticky">
+      <div class="text-panels-wrap">
+        <div class="text-panel" id="text-panel-1">
+          <h2 class="opp-heading">The energy is already there.</h2>
+          <p class="opp-body">Energy is generated and wasted every day inside existing infrastructure such as gas pipelines, water networks and industrial facilities.</p>
+        </div>
+        <div class="text-panel" id="text-panel-2">
+          <h2 class="opp-heading">We capture and reuse it.</h2>
+          <p class="opp-body">What's missing isn't the technology — it's the developer. Proven technology on one side. Wasted energy on the other. We stand in between — developing the project, and operating it for the long term.</p>
+        </div>
+      </div>
+      <div class="energy-canvas-wrap">
+        <canvas id="energy-canvas" width="420" height="420"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CONVICTION ──────────────────────────────────── -->
+  <section id="conviction">
+    <span class="section-tag">Our Thesis</span>
+    <p class="conviction-text">The cheapest clean energy is the energy already flowing through existing infrastructure.</p>
+  </section>
+
+  <!-- ── WHAT WE DO ───────────────────────────────────── -->
+  <section id="what-we-do">
+    <div class="what-header">
+      <div>
+        <h2>From opportunity<br><span class="h2-line2"><span class="h2-yellow-bar" id="what-yellow-bar"></span>to revenue.</span></h2>
+      </div>
+    </div>
+    <div class="process-items">
+      <div class="process-item">
+        <div class="process-item-dot"></div>
+        <span class="process-item-num">01</span>
+        <div class="process-item-content">
+          <div class="process-item-title">Originate</div>
+          <p class="process-item-body">We find infrastructure that's wasting energy and the right technology to capture it — and bring the two together.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-item-dot"></div>
+        <span class="process-item-num">02</span>
+        <div class="process-item-content">
+          <div class="process-item-title">Develop</div>
+          <p class="process-item-body">The full development process — permitting, engineering, financing and contracts, at zero cost to the asset owner.</p>
+        </div>
+      </div>
+      <div class="process-item">
+        <div class="process-item-dot"></div>
+        <span class="process-item-num">03</span>
+        <div class="process-item-content">
+          <div class="process-item-title">Operate</div>
+          <p class="process-item-body">Every project is run and maintained for its full operating life — with equity, and incentives tied to performance.</p>
+        </div>
+      </div>
+    </div>
+    <a href="what-we-do.html" class="what-we-do-link">How we work <img src="right-up.png" alt="" class="what-we-do-arrow" /></a>
+  </section>
+
+  <!-- ── WHY NOW ─────────────────────────────────────── -->
+  <section id="why-now">
+    <div class="why-now-inner">
+      <span class="section-tag" style="color:rgba(250,247,241,0.6)">Why Now</span>
+      <h2 class="why-now-heading fade-up">The technology is ready.<br>Most of it still undeployed.</h2>
+      <p class="why-now-body fade-up" style="transition-delay:0.12s">Demand in these markets is outgrowing conventional supply, just as the technologies that capture wasted energy have reached commercial maturity — proven in real deployments, bankable, and returning capital without subsidy. So far they're deployed by their manufacturers at home, and almost nowhere else.</p>
+    </div>
+  </section>
+
+  <!-- ── CLOSING CTA ──────────────────────────────────── -->
+  <div id="site-cta"></div>
+  <script src="cta.js"></script>
+
+  <!-- ── FOOTER ───────────────────────────────────────── -->
+  <div id="site-footer"></div>
+  <script src="footer.js"></script>
+
+  <script>
+    // Scroll-driven text panels + energy canvas
+    const textDriver = document.getElementById('text-scroll-driver');
+    const panel1 = document.getElementById('text-panel-1');
+    const panel2 = document.getElementById('text-panel-2');
+    const energyCanvas = document.getElementById('energy-canvas');
+
+    const isMobile = () => window.innerWidth <= 860;
+    // Honours the OS-level "reduce motion" setting: no looping video, no
+    // continuously animating canvas, no progressive text reveal.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (textDriver && panel1 && panel2 && energyCanvas) {
+      panel2.style.opacity = '0';
+      panel2.style.transform = 'translateY(24px)';
+
+      // ── Canvas setup ──
+      const ctx = energyCanvas.getContext('2d');
+      const W = 420, H = 420, CX = 210, CY = 210;
+      const N = 110;
+      let captureT = 0, targetCaptureT = 0, tick = 0;
+      let particles = [];
+
+      function initParticles() {
+        particles = [];
+        for (let i = 0; i < N; i++) {
+          const angle = (i / N) * Math.PI * 2;
+          particles.push({
+            angle: angle + (Math.random() - 0.5) * 0.35,
+            speed: 0.35 + Math.random() * 0.5,
+            size:  1.8 + Math.random() * 2.4,
+            opacity: 0.5 + Math.random() * 0.5,
+            phase: Math.random() * Math.PI * 2,
+            maxR: 210 + Math.random() * 70,
+          });
+        }
+      }
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function drawCanvas() {
+        tick += 0.016;
+        captureT += (targetCaptureT - captureT) * 0.045;
+
+        ctx.clearRect(0, 0, W, H);
+
+        const outerR = 42, innerR = 28;
+
+        // Glow halo
+        const grd = ctx.createRadialGradient(CX, CY, 0, CX, CY, outerR * 3);
+        grd.addColorStop(0, `rgba(252,181,4,${0.10 + captureT * 0.18})`);
+        grd.addColorStop(1, 'rgba(252,181,4,0)');
+        ctx.beginPath();
+        ctx.arc(CX, CY, outerR * 3, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+
+        // Outer ring
+        ctx.beginPath();
+        ctx.arc(CX, CY, outerR, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(27,42,74,${lerp(0.2, 0.55, captureT)})`;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Inner circle — fills with yellow as captureT rises
+        ctx.beginPath();
+        ctx.arc(CX, CY, innerR, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(252,181,4,${lerp(0.12, 0.85, captureT)})`;
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(27,42,74,0.7)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Spokes
+        for (let i = 0; i < 4; i++) {
+          const a = (i / 4) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.moveTo(CX + Math.cos(a) * 7, CY + Math.sin(a) * 7);
+          ctx.lineTo(CX + Math.cos(a) * innerR, CY + Math.sin(a) * innerR);
+          ctx.strokeStyle = `rgba(27,42,74,${lerp(0.3, 0.5, captureT)})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+
+        // Particles
+        for (let i = 0; i < N; i++) {
+          const p = particles[i];
+          const t = tick * p.speed + p.phase;
+          const a = p.angle + tick * 0.035;
+          let r, alpha;
+
+          if (captureT < 0.5) {
+            // Waste: radiate outward and fade
+            const cycle = ((t % (Math.PI * 2)) / (Math.PI * 2) + 1) % 1;
+            r = lerp(outerR + 8, p.maxR, cycle);
+            const fadeFraction = (r - outerR - 8) / (p.maxR - outerR - 8);
+            alpha = p.opacity * (1 - fadeFraction) * (1 - captureT * 1.8);
+          } else {
+            // Capture: converge inward
+            const cT = (captureT - 0.5) * 2;
+            const cycle = ((t % (Math.PI * 2)) / (Math.PI * 2) + 1) % 1;
+            r = lerp(p.maxR * 0.65, outerR + 5, cycle);
+            const fadeFraction = 1 - (r - outerR - 5) / (p.maxR * 0.65 - outerR - 5);
+            alpha = p.opacity * fadeFraction * cT;
+          }
+
+          const x = CX + Math.cos(a) * r;
+          const y = CY + Math.sin(a) * r;
+          ctx.beginPath();
+          ctx.arc(x, y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(252,181,4,${Math.max(0, Math.min(1, alpha))})`;
+          ctx.fill();
+        }
+
+        // Capture mode: converging lines
+        if (captureT > 0.5) {
+          const lt = (captureT - 0.5) * 2;
+          for (let i = 0; i < N; i += 3) {
+            const p = particles[i];
+            const a = p.angle + tick * 0.035;
+            ctx.beginPath();
+            ctx.moveTo(CX + Math.cos(a) * p.maxR * 0.55, CY + Math.sin(a) * p.maxR * 0.55);
+            ctx.lineTo(CX + Math.cos(a) * outerR, CY + Math.sin(a) * outerR);
+            ctx.strokeStyle = `rgba(252,181,4,${lt * 0.1})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+
+        // Reuse mode: hydro-blue particles flow outward in 4 organized beams
+        if (captureT > 0.72) {
+          const rt = (captureT - 0.72) / 0.28;
+          for (let b = 0; b < 4; b++) {
+            const ba = (b / 4) * Math.PI * 2 + Math.PI * 0.25;
+            // Beam guide line — faint
+            const beamEnd = 175;
+            ctx.beginPath();
+            ctx.moveTo(CX + Math.cos(ba) * (outerR + 8), CY + Math.sin(ba) * (outerR + 8));
+            ctx.lineTo(CX + Math.cos(ba) * beamEnd, CY + Math.sin(ba) * beamEnd);
+            ctx.strokeStyle = `rgba(43,110,212,${rt * 0.12})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+            // Dots flowing outward
+            for (let d = 0; d < 5; d++) {
+              const cycle = ((tick * 0.42 + d / 5) % 1);
+              const beamR = lerp(outerR + 10, beamEnd, cycle);
+              const dotAlpha = rt * 0.75 * Math.sin(cycle * Math.PI);
+              ctx.beginPath();
+              ctx.arc(
+                CX + Math.cos(ba) * beamR,
+                CY + Math.sin(ba) * beamR,
+                lerp(3.2, 1, cycle),
+                0, Math.PI * 2
+              );
+              ctx.fillStyle = `rgba(43,110,212,${Math.max(0, dotAlpha)})`;
+              ctx.fill();
+            }
+          }
+        }
+
+        if (!prefersReducedMotion) requestAnimationFrame(drawCanvas);
+      }
+
+      initParticles();
+      // Reduced motion: render a single settled frame instead of looping.
+      if (prefersReducedMotion) captureT = targetCaptureT = 1;
+      drawCanvas();
+
+      // ── Scroll update ──
+      function updateTextPanels() {
+        const rect = textDriver.getBoundingClientRect();
+        const total = textDriver.offsetHeight - window.innerHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const progress = Math.min(1, scrolled / total);
+
+        const t1 = Math.max(0, Math.min(1, (progress - 0.25) / 0.3));
+        // Panel 2 settles into its centered resting position early (by ~62% of the
+        // scroll) so it reads as vertically centered for most of the time it's visible.
+        const t2 = Math.max(0, Math.min(1, (progress - 0.45) / 0.17));
+        panel1.style.opacity = 1 - t1;
+        panel1.style.transform = `translateY(${-t1 * 24}px)`;
+        panel2.style.opacity = t2;
+        panel2.style.transform = `translateY(${(1 - t2) * 24}px)`;
+
+        // Canvas: switch to capture as panel 2 comes in
+        targetCaptureT = Math.max(0, Math.min(1, (progress - 0.48) / 0.25));
+      }
+      window.addEventListener('scroll', updateTextPanels, { passive: true });
+      updateTextPanels();
+    }
+
+    // Scroll-driven yellow bar in what-we-do heading
+    const whatYellowBar = document.getElementById('what-yellow-bar');
+    const whatSection = document.getElementById('what-we-do');
+    if (whatYellowBar && whatSection) {
+      const BAR_MAX = isMobile() ? 18 : 56;
+      const BAR_MARGIN = isMobile() ? 10 : 18;
+      function updateYellowBar() {
+        const rect = whatSection.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, (window.innerHeight - rect.top) / (window.innerHeight * 0.6)));
+        const w = progress * BAR_MAX;
+        whatYellowBar.style.width = w + 'px';
+        whatYellowBar.style.marginRight = w > 0 ? BAR_MARGIN + 'px' : '0';
+      }
+      window.addEventListener('scroll', updateYellowBar, { passive: true });
+      updateYellowBar();
+    }
+
+    // Conviction word-by-word highlight
+    const convictionSection = document.getElementById('conviction');
+    const convictionText = convictionSection?.querySelector('.conviction-text');
+    if (convictionSection && convictionText) {
+      // Split into character spans
+      const part1 = "The cheapest clean energy is";
+      const part2 = "the energy already flowing through existing infrastructure.";
+      function charsToSpans(str, extraClass) {
+        return str.split('').map(ch =>
+          ch === ' '
+            ? ' '
+            : `<span class="conviction-word${extraClass}">${ch}</span>`
+        ).join('');
+      }
+      convictionText.innerHTML =
+        charsToSpans(part1, '') + ' ' + charsToSpans(part2, ' conviction-word--strong conviction-word--yellow');
+      const wordSpans = convictionText.querySelectorAll('.conviction-word');
+      if (prefersReducedMotion) wordSpans.forEach(s => s.classList.add('lit'));
+
+      function updateConviction() {
+        if (prefersReducedMotion) return;
+        const rect = convictionSection.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1,
+          (window.innerHeight * 0.55 - rect.top) / (window.innerHeight * 0.30)
+        ));
+        const litCount = Math.round(progress * wordSpans.length);
+        wordSpans.forEach((span, i) => span.classList.toggle('lit', i < litCount));
+      }
+      window.addEventListener('scroll', updateConviction, { passive: true });
+      updateConviction();
+    }
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('nav-hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      nav.classList.remove('menu-open');
+      document.body.style.overflow = '';
+    }
+    hamburger?.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      nav.classList.toggle('menu-open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    document.getElementById('mobile-menu-close')?.addEventListener('click', closeMobileMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+
+    // Nav scroll state
+    const nav = document.getElementById('main-nav');
+    const heroSection = document.getElementById('hero');
+    function updateNav() {
+      const heroBottom = heroSection.offsetHeight;
+      const pastHero = window.scrollY >= heroBottom - 88;
+      nav.classList.toggle('scrolled', pastHero);
+      nav.classList.toggle('over-hero', !pastHero);
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // Hero video
+    // Hero split lines entry
+    setTimeout(() => {
+      document.querySelectorAll('.hero-line').forEach(el => el.classList.add('visible'));
+    }, 200);
+
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo) {
+      if (prefersReducedMotion) {
+        heroVideo.pause();
+        heroVideo.removeAttribute('autoplay');
+      } else {
+        heroVideo.playbackRate = 0.95;
+        heroVideo.play().catch(() => {});
+      }
+    }
+
+
+    // streams entry animation
+    const streamItems = document.querySelectorAll('.streams-item');
+    const streamObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 100);
+          streamObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    streamItems.forEach(el => streamObserver.observe(el));
+
+  </script>
+</body>
+</html>
