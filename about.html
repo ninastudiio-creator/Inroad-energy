@@ -166,7 +166,8 @@
       font-weight: 300;
       line-height: 1.7;
       color: rgba(27,42,74,0.65);
-      max-width: calc(46vw - var(--pad-x));
+      /* slightly wider than the h1 above it, so the rag reads less blocky */
+      max-width: calc(51vw - var(--pad-x));
       margin-bottom: 0;
     }
     .status-badge {
@@ -305,7 +306,19 @@
       font-weight: 600;
       color: var(--navy);
       margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
     }
+    .desktop-br { display: inline; }
+
+    .team-linkedin {
+      display: inline-flex;
+      color: rgba(27,42,74,0.45);
+      transition: color 0.22s ease;
+    }
+    .team-linkedin svg { width: 17px; height: 17px; display: block; }
+    .team-linkedin:hover { color: var(--hydro); }
     .team-title {
       font-size: 12px;
       font-weight: 500;
@@ -529,6 +542,8 @@
       /* Hero: image drops below the text instead of floating beside it */
       .page-header h1 { font-size: 34px; }
       .page-header-sub { font-size: 17px; max-width: 620px; }
+      /* the forced break is a desktop-only typographic choice */
+      .desktop-br { display: none; }
 
       .philosophy { padding: 56px var(--pad-x) 56px; }
       .philosophy-headline { font-size: 26px; max-width: 100%; }
@@ -623,7 +638,7 @@
   <div class="hero-wrapper">
     <div class="page-header">
             <h1>Accountable from first insight to full operation.</h1>
-      <p class="page-header-sub">We're builders, not advisors. Inroad holds under one roof what this market has always kept in separate hands: we make the match no one else was positioned to make, put our own stake behind it, and stand behind the outcome.</p>
+      <p class="page-header-sub">We're builders, not advisors. We recognized that developing waste-energy projects required more than technology, capital, or advisory services alone — <br class="desktop-br" />it required a single, integrated approach. We bring every part of the process together, and stand behind the outcome.</p>
 
     </div>
     <img class="hero-img" src="about-hero-pipes.jpg" alt="" />
@@ -639,7 +654,7 @@
         <div class="team-photo">
           <img src="nir.jpg" alt="Nir Tarlovsky" />
         </div>
-        <p class="team-name">Nir Tarlovsky</p>
+        <p class="team-name">Nir Tarlovsky<a class="team-linkedin" href="https://www.linkedin.com/in/nirtarlovsky/" target="_blank" rel="noopener" aria-label="Nir Tarlovsky on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></p>
         <p class="team-title">Co-Founder &amp; CEO</p>
       </div>
 
@@ -647,7 +662,7 @@
         <div class="team-photo">
           <img src="omer.jpg" alt="Omer Agadi" />
         </div>
-        <p class="team-name">Omer Agadi</p>
+        <p class="team-name">Omer Agadi<a class="team-linkedin" href="https://www.linkedin.com/in/omer-agadi-04a20a1b6/" target="_blank" rel="noopener" aria-label="Omer Agadi on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></p>
         <p class="team-title">Co-Founder &amp; EVP Business Development</p>
       </div>
 

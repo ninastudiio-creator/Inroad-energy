@@ -1,3 +1,30 @@
 .DS_Store
 **/.DS_Store
 .claude/settings.local.json
+
+# Source font package — the site only uses fonts/archivo-var.woff2,
+# which is generated from it. 108 unused TTFs, ~14MB.
+Archivo/
+
+# Original full-resolution assets, kept locally for future edits.
+_originals/
+
+# Superseded page backup
+index.backup.html
+
+# Brand source documents, not part of the site
+*.pages
+Inroad Energy Visual Identity V3.pdf
+
+# Unused source images kept locally
+old.png
+hero photo.png
+backrpund blue section.png
+1.png
+industrial_blue_pipes_4x5.png
+nir.png
+omer.png
+logo 1.png
+favricon.png
+אייקונים תהליך/
+water.jpg

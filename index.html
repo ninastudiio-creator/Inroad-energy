@@ -965,11 +965,11 @@
       <div class="text-panels-wrap">
         <div class="text-panel" id="text-panel-1">
           <h2 class="opp-heading">The energy is already there.</h2>
-          <p class="opp-body">Energy is generated and wasted every day inside existing infrastructure such as gas pipelines, water networks and industrial facilities.</p>
+          <p class="opp-body">Energy is wasted every day inside existing infrastructure — gas pipelines, water networks, industrial facilities.</p>
         </div>
         <div class="text-panel" id="text-panel-2">
           <h2 class="opp-heading">We capture and reuse it.</h2>
-          <p class="opp-body">What's missing isn't the technology — it's the developer. Proven technology on one side. Wasted energy on the other. We stand in between — developing the project, and operating it for the long term.</p>
+          <p class="opp-body">What's missing isn't the technology — it's the developer. We stand between proven technology and wasted energy, developing the project and operating it for the long term.</p>
         </div>
       </div>
       <div class="energy-canvas-wrap">
@@ -981,14 +981,14 @@
   <!-- ── CONVICTION ──────────────────────────────────── -->
   <section id="conviction">
     <span class="section-tag">Our Thesis</span>
-    <p class="conviction-text">The cheapest clean energy is the energy already flowing through existing infrastructure.</p>
+    <p class="conviction-text">The cheapest clean energy isn't generated.<br>It's recovered.</p>
   </section>
 
   <!-- ── WHAT WE DO ───────────────────────────────────── -->
   <section id="what-we-do">
     <div class="what-header">
       <div>
-        <h2>From opportunity<br><span class="h2-line2"><span class="h2-yellow-bar" id="what-yellow-bar"></span>to revenue.</span></h2>
+        <h2>From opportunity<br><span class="h2-line2"><span class="h2-yellow-bar" id="what-yellow-bar"></span>to operating asset.</span></h2>
       </div>
     </div>
     <div class="process-items">
@@ -1013,11 +1013,11 @@
         <span class="process-item-num">03</span>
         <div class="process-item-content">
           <div class="process-item-title">Operate</div>
-          <p class="process-item-body">Every project is run and maintained for its full operating life — with equity, and incentives tied to performance.</p>
+          <p class="process-item-body">Every project is run and maintained for its full operating life — with our own equity at stake, and incentives tied to performance.</p>
         </div>
       </div>
     </div>
-    <a href="what-we-do.html" class="what-we-do-link">How we work <img src="right-up.png" alt="" class="what-we-do-arrow" /></a>
+    <a href="what-we-do.html" class="what-we-do-link">What we do <img src="right-up.png" alt="" class="what-we-do-arrow" /></a>
   </section>
 
   <!-- ── WHY NOW ─────────────────────────────────────── -->
@@ -1025,7 +1025,7 @@
     <div class="why-now-inner">
       <span class="section-tag" style="color:rgba(250,247,241,0.6)">Why Now</span>
       <h2 class="why-now-heading fade-up">The technology is ready.<br>Most of it still undeployed.</h2>
-      <p class="why-now-body fade-up" style="transition-delay:0.12s">Demand in these markets is outgrowing conventional supply, just as the technologies that capture wasted energy have reached commercial maturity — proven in real deployments, bankable, and returning capital without subsidy. So far they're deployed by their manufacturers at home, and almost nowhere else.</p>
+      <p class="why-now-body fade-up" style="transition-delay:0.12s">Energy demand is outpacing supply faster than grids can keep up — right as the technology to recover wasted energy has reached commercial maturity: proven in operation, financeable on its own economics, and still largely untapped outside a handful of markets.</p>
     </div>
   </section>
 
@@ -1250,8 +1250,8 @@
     const convictionText = convictionSection?.querySelector('.conviction-text');
     if (convictionSection && convictionText) {
       // Split into character spans
-      const part1 = "The cheapest clean energy is";
-      const part2 = "the energy already flowing through existing infrastructure.";
+      const part1 = "The cheapest clean energy isn't generated.";
+      const part2 = "It's recovered.";
       function charsToSpans(str, extraClass) {
         return str.split('').map(ch =>
           ch === ' '
@@ -1260,7 +1260,7 @@
         ).join('');
       }
       convictionText.innerHTML =
-        charsToSpans(part1, '') + ' ' + charsToSpans(part2, ' conviction-word--strong conviction-word--yellow');
+        charsToSpans(part1, '') + '<br>' + charsToSpans(part2, ' conviction-word--strong conviction-word--yellow');
       const wordSpans = convictionText.querySelectorAll('.conviction-word');
       if (prefersReducedMotion) wordSpans.forEach(s => s.classList.add('lit'));
 
