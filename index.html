@@ -861,6 +861,17 @@
       /* Footer */
       footer { flex-direction: column; gap: 20px; text-align: center; padding: 36px 24px; }
       .footer-right { flex-direction: column; gap: 12px; }
+    
+      /* ─── TOUCH TARGETS ───────────────────────────────
+         Fingertip-sized tap areas. Padding only — type size,
+         colour and desktop layout are untouched. */
+      .footer-copy a { display: inline-block; padding: 9px 6px; }
+      .cta-contact-item { padding: 7px 0; }
+      .cta-headline-link { padding: 6px 0; }
+      .what-we-do-link { padding: 11px 0; }
+      .audience-cta { padding: 9px 0; }
+      .nav-links a, .mobile-menu ul li a { padding-top: 10px; padding-bottom: 10px; }
+      .team-linkedin { padding: 9px; margin: -9px; }
     }
     @media (max-width: 500px) {
       h1 { font-size: 38px; }
@@ -1059,6 +1070,9 @@
       const N = 110;
       let captureT = 0, targetCaptureT = 0, tick = 0;
       let particles = [];
+      // The loop idles while the graphic is off-screen — it costs battery on
+      // phones otherwise. It picks straight back up when scrolled into view.
+      let canvasOnScreen = true;
 
       function initParticles() {
         particles = [];
@@ -1197,10 +1211,18 @@
           }
         }
 
-        if (!prefersReducedMotion) requestAnimationFrame(drawCanvas);
+        if (!prefersReducedMotion && canvasOnScreen) requestAnimationFrame(drawCanvas);
       }
 
       initParticles();
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var wasOn = canvasOnScreen;
+          canvasOnScreen = e.isIntersecting;
+          if (canvasOnScreen && !wasOn && !prefersReducedMotion) drawCanvas();
+        });
+      }, { threshold: 0 }).observe(energyCanvas);
+
       // Reduced motion: render a single settled frame instead of looping.
       if (prefersReducedMotion) captureT = targetCaptureT = 1;
       drawCanvas();
