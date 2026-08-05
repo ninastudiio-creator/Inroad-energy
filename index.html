@@ -185,6 +185,42 @@
     /* "energy" sits on line 1 by default; the mobile block moves it to line 2,
        which shortens the longest line and lets the headline run much larger. */
     .hero-w-mob { display: none; }
+
+    /* ─── HERO SCROLL CUE (mobile only) ───────────────── */
+    .hero-scroll {
+      display: none;
+      width: 44px;
+      height: 44px;
+      margin-top: 22px;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .hero-scroll-line {
+      position: relative;
+      display: block;
+      width: 1px;
+      height: 38px;
+      background: rgba(250, 247, 241, 0.28);
+      overflow: hidden;
+    }
+    /* a lit segment travels down the line — the same "energy moving" idea
+       the canvas graphics use, at a whisper */
+    .hero-scroll-line::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 14px;
+      background: var(--stone);
+      animation: heroScrollTrail 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @keyframes heroScrollTrail {
+      0%   { transform: translateY(-14px); opacity: 0; }
+      25%  { opacity: 1; }
+      75%  { opacity: 1; }
+      100% { transform: translateY(38px); opacity: 0; }
+    }
     .hero-line {
       display: block;
       opacity: 0;
@@ -806,7 +842,10 @@
       .hero-w-mob  { display: inline; }
       h1 { font-size: min(46px, calc(11vw - 6px)); }
       .desktop-br { display: none; }
-      .hero-content { padding: 0 28px 62px; }
+      /* the cue below the headline lifts it clear of the home indicator
+         and gives the type something to sit on */
+      .hero-content { padding: 0 28px 40px; }
+      .hero-scroll { display: flex; }
 
       /* Scroll panels — sticky on mobile, canvas on top */
       .text-scroll-driver {
@@ -952,6 +991,9 @@
       .streams-item { opacity: 1; transform: none; }
       /* Conviction copy is shown fully lit rather than revealed on scroll */
       .conviction-text { color: var(--stone); }
+      /* the scroll cue keeps its line but drops the travelling segment */
+      .hero-scroll-line::after { display: none; }
+      .hero-scroll-line { background: rgba(250, 247, 241, 0.5); }
     }
   </style>
 </head>
@@ -997,6 +1039,9 @@
           <span class="hero-line-wrap"><span class="hero-line">Turning wasted<span class="hero-w-desk"> energy</span></span></span>
           <span class="hero-line-wrap"><span class="hero-line" style="transition-delay:0.15s"><span class="hero-w-mob">energy </span>into power.</span></span>
         </h1>
+        <a class="hero-scroll" href="#text-scroll-driver" aria-label="Scroll to content">
+          <span class="hero-scroll-line"></span>
+        </a>
       </div>
     </div>
   </section>
