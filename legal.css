@@ -290,4 +290,12 @@ a:focus-visible, button:focus-visible {
   .audience-cta { padding: 9px 0; }
   .nav-links a, .mobile-menu ul li a { padding-top: 10px; padding-bottom: 10px; }
   .team-linkedin { padding: 9px; margin: -9px; }
+
+  /* ─── FOOTER (mobile) ─────────────────────────────
+     Tighter stacking, slightly larger mark. Tap areas kept. */
+  footer { gap: 10px; padding: 20px 24px 24px; }
+  .footer-logo { max-height: 104px; }
+  .footer-copy { font-size: 12px; line-height: 1.45; }
+  .footer-copy a { padding: 7px 5px; }
+
 }

@@ -182,6 +182,9 @@
       overflow: hidden;
       display: block;
     }
+    /* "energy" sits on line 1 by default; the mobile block moves it to line 2,
+       which shortens the longest line and lets the headline run much larger. */
+    .hero-w-mob { display: none; }
     .hero-line {
       display: block;
       opacity: 0;
@@ -795,9 +798,11 @@
 
       /* Hero */
       #hero { height: 100svh; min-height: -webkit-fill-available; }
-      /* Scales down just enough to keep "Turning wasted energy" on one line,
-         so the headline stays two lines on every phone width. */
-      h1 { font-size: min(46px, calc(9vw - 5px)); }
+      /* Split as "Turning wasted / energy into power." — the shorter longest
+         line lets the type run ~25% larger and still hold two lines. */
+      .hero-w-desk { display: none; }
+      .hero-w-mob  { display: inline; }
+      h1 { font-size: min(46px, calc(11vw - 6px)); }
       .desktop-br { display: none; }
       .hero-content { padding: 0 28px 62px; }
 
@@ -805,7 +810,9 @@
       .text-scroll-driver {
         height: 200vh;
         margin-bottom: 0;
-        background: linear-gradient(to bottom, var(--stone) 50%, var(--navy) 72%);
+        /* Plain stone: the old navy gradient showed as a strip below the
+           sticky panel once the panel stopped at the viewport bottom. */
+        background: var(--stone);
       }
       /* Sits below the fixed nav rather than under it, so the panel reads as a
          full screen and its contents centre between the nav and the bottom. */
@@ -841,13 +848,17 @@
       /* The navy band spans the page width, keeping the standard side gap */
       #why-now { padding: 48px 0 56px; }
       .why-now-inner { margin: 0 var(--pad-x); padding: 48px 24px; }
+      /* let the heading wrap naturally instead of breaking mid-phrase */
+      .why-now-br { display: none; }
 
       /* Conviction text */
       .conviction-text { font-size: clamp(22px, 6vw, 30px); }
       /* the two sentences run together on narrow screens */
       .conviction-br { display: none; }
 
-      /* What we do */
+      /* What we do — the 157px desktop top padding has ID specificity, so the
+         generic `section` rule never reached it on phones. */
+      #what-we-do { padding: 72px var(--pad-x) 60px; }
       .what-header { grid-template-columns: 1fr; gap: 20px; }
       .what-header h2 { font-size: 34px; }
       .process-items { grid-template-columns: 1fr; gap: 64px; }
@@ -880,6 +891,14 @@
       .audience-cta { padding: 9px 0; }
       .nav-links a, .mobile-menu ul li a { padding-top: 10px; padding-bottom: 10px; }
       .team-linkedin { padding: 9px; margin: -9px; }
+
+      /* ─── FOOTER (mobile) ─────────────────────────────
+         Tighter stacking, slightly larger mark. Tap areas kept. */
+      footer { gap: 10px; padding: 20px 24px 24px; }
+      .footer-logo { max-height: 104px; }
+      .footer-copy { font-size: 12px; line-height: 1.45; }
+      .footer-copy a { padding: 7px 5px; }
+
     }
     @media (max-width: 500px) {
       /* h1 size is handled by the fluid rule in the 860px block above */
@@ -971,8 +990,8 @@
       <div class="hero-scrim"></div>
       <div class="hero-content">
         <h1>
-          <span class="hero-line-wrap"><span class="hero-line">Turning wasted energy</span></span>
-          <span class="hero-line-wrap"><span class="hero-line" style="transition-delay:0.15s">into power.</span></span>
+          <span class="hero-line-wrap"><span class="hero-line">Turning wasted<span class="hero-w-desk"> energy</span></span></span>
+          <span class="hero-line-wrap"><span class="hero-line" style="transition-delay:0.15s"><span class="hero-w-mob">energy </span>into power.</span></span>
         </h1>
       </div>
     </div>
@@ -1043,7 +1062,7 @@
   <section id="why-now">
     <div class="why-now-inner">
       <span class="section-tag" style="color:rgba(250,247,241,0.6)">Why Now</span>
-      <h2 class="why-now-heading fade-up">The technology is ready.<br>Most of it still undeployed.</h2>
+      <h2 class="why-now-heading fade-up">The technology is ready. <br class="why-now-br">Most of it still undeployed.</h2>
       <p class="why-now-body fade-up" style="transition-delay:0.12s">Energy demand is outpacing supply faster than grids can keep up — right as the technology to recover wasted energy has reached commercial maturity: proven in operation, financeable on its own economics, and still largely untapped outside a handful of markets.</p>
     </div>
   </section>
