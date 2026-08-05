@@ -599,7 +599,7 @@
       .nav-inner { padding: 0 24px; }
 
       .page-header { padding: 128px var(--pad-x) 40px; }
-      .page-header h1 { font-size: 34px; }
+      .page-header h1 { font-size: 38px; }
       .page-header-sub { font-size: 17px; line-height: 1.6; max-width: 620px; }
       /* the forced break is a desktop-only typographic choice */
       .desktop-br { display: none; }
@@ -615,14 +615,19 @@
       .stage-tag { font-size: 13px; }
       .stage-headline { font-size: 26px; }
       .stage-body p { font-size: 16px; line-height: 1.7; max-width: 640px; }
-      .stage-image { flex: none; width: 100%; aspect-ratio: 4 / 3; }
+      /* image leads each stage, keeping the desktop portrait crop */
+      .stage-image { flex: none; width: 100%; aspect-ratio: 4 / 5; order: -1; }
 
       #focus { padding: 32px var(--pad-x) 56px; }
       .focus-header { margin-bottom: 28px; }
       .streams-note { max-width: 100%; font-size: 27px; }
       .streams-gallery { grid-template-columns: 1fr 1fr; gap: 12px; }
       .streams-item { aspect-ratio: 4 / 3; }
+      /* touch devices latch :hover on tap, which left images stuck bright and
+         scaled. Hold the resting state instead — dimmed, no lift, no zoom. */
       .streams-item:hover { transform: none; box-shadow: none; }
+      .streams-item:hover::after { opacity: 1; }
+      .streams-item:hover img { filter: grayscale(0.6) brightness(0.75); transform: none; }
       .streams-item-label { padding: 40px 16px 16px; font-size: 15px; }
 
       .faq-columns { grid-template-columns: 1fr; gap: 40px; }
@@ -663,7 +668,7 @@
     }
 
     @media (max-width: 500px) {
-      .page-header h1 { font-size: 30px; }
+      .page-header h1 { font-size: 34px; }
       .stage-headline { font-size: 23px; }
       .mobile-br { display: inline; }
       .streams-note { font-size: 24px; }
