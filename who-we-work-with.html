@@ -441,17 +441,26 @@
 
       /* One column; text always reads before the graphic */
       /* Full-bleed on mobile: an inset card wastes ~48px the headline needs */
+      /* two distinct panels rather than full-bleed bands: they keep the page
+         gutter at the sides and a clear gap between them */
       .audience-section,
-      .audience-section--flip { grid-template-columns: 1fr; gap: 28px; padding: 52px var(--pad-x); margin: 0; }
+      .audience-section--flip {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 44px 26px;
+        margin: 0 var(--pad-x) 20px;
+      }
       .audience-section:first-of-type { margin-top: 36px; }
-      .audience-section + .audience-section { border-top: 1px solid rgba(250,247,241,0.12); }
-      .audience-section--last { margin-bottom: 0; }
-      .audience-section--flip .audience-text { order: 1; }
-      .audience-section--flip .audience-canvas-wrap { order: 2; }
+      .audience-section--last { margin-bottom: 40px; }
+      /* graphic leads, copy follows — in both panels */
+      .audience-canvas-wrap,
+      .audience-section--flip .audience-canvas-wrap { order: -1; }
+      .audience-text,
+      .audience-section--flip .audience-text { order: 0; }
       .audience-heading { font-size: clamp(21px, 5.2vw, 30px); }
       .audience-body { font-size: 16px; margin-bottom: 28px; max-width: 620px; }
       .audience-cta { font-size: 14px; }
-      .audience-canvas-wrap canvas { max-width: 240px; }
+      .audience-canvas-wrap canvas { max-width: 290px; }
 
       /* Shared CTA + footer (cta.js / footer.js markup) */
       #cta { padding: 48px var(--pad-x); }
