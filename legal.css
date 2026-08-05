@@ -293,7 +293,11 @@ a:focus-visible, button:focus-visible {
 
   /* ─── FOOTER (mobile) ─────────────────────────────
      Tighter stacking, slightly larger mark. Tap areas kept. */
-  footer { gap: 10px; padding: 20px 24px 24px; }
+  #cta { padding: 34px var(--pad-x) 28px; }
+  .cta-inner { gap: 22px; }
+  .cta-contact { gap: 8px; }
+  .cta-right { padding-bottom: 0; }
+  footer { gap: 4px; padding: 12px 24px 18px; }
   .footer-logo { max-height: 104px; }
   .footer-copy { font-size: 12px; line-height: 1.45; }
   .footer-copy a { padding: 7px 5px; }
