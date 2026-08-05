@@ -797,7 +797,9 @@
       .nav-inner { padding: 20px 28px 0; height: 88px; }
 
       /* Hero */
-      #hero { height: 100svh; min-height: -webkit-fill-available; }
+      /* dvh tracks the visible area as the address bar collapses, so the hero
+         always fills the screen. The vh line is the fallback for old browsers. */
+      #hero { height: 100vh; height: 100dvh; min-height: 0; }
       /* Split as "Turning wasted / energy into power." — the shorter longest
          line lets the type run ~25% larger and still hold two lines. */
       .hero-w-desk { display: none; }
@@ -824,7 +826,9 @@
         grid-template-rows: auto auto;
         align-content: center;
         align-items: center;
-        padding: 0 24px;
+        /* top padding only — nudges the centred group down without making
+           the section any taller */
+        padding: 56px 24px 0;
         gap: 0;
         overflow: hidden;
         background: var(--stone);
