@@ -795,7 +795,9 @@
 
       /* Hero */
       #hero { height: 100svh; min-height: -webkit-fill-available; }
-      h1 { font-size: 46px; }
+      /* Scales down just enough to keep "Turning wasted energy" on one line,
+         so the headline stays two lines on every phone width. */
+      h1 { font-size: min(46px, calc(9vw - 5px)); }
       .desktop-br { display: none; }
       .hero-content { padding: 0 28px 62px; }
 
@@ -805,14 +807,17 @@
         margin-bottom: 0;
         background: linear-gradient(to bottom, var(--stone) 50%, var(--navy) 72%);
       }
+      /* Sits below the fixed nav rather than under it, so the panel reads as a
+         full screen and its contents centre between the nav and the bottom. */
       .text-scroll-sticky {
         position: sticky;
-        top: 0;
-        height: 100svh;
+        top: 88px;
+        height: calc(100svh - 88px);
         grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
-        align-items: start;
-        padding: 80px 24px 32px;
+        grid-template-rows: auto auto;
+        align-content: center;
+        align-items: center;
+        padding: 0 24px;
         gap: 0;
         overflow: hidden;
         background: var(--stone);
@@ -824,7 +829,7 @@
         padding-bottom: 24px;
         order: -1;
       }
-      #energy-canvas { max-width: 260px; height: auto; }
+      #energy-canvas { max-width: 320px; height: auto; }
       .text-panels-wrap { position: relative; height: 240px; }
       .text-panel { position: absolute; top: 0; bottom: auto; left: 0; right: 0; display: block; }
       #text-panel-2 { margin-top: 0; padding-bottom: 0; }
@@ -833,11 +838,14 @@
       section { padding: 60px var(--pad-x); }
       #conviction { padding: 80px var(--pad-x); }
 
-      /* Scroll section bottom padding */
-      .text-scroll-sticky { padding-bottom: 48px; }
+      /* The navy band spans the page width, keeping the standard side gap */
+      #why-now { padding: 48px 0 56px; }
+      .why-now-inner { margin: 0 var(--pad-x); padding: 48px 24px; }
 
       /* Conviction text */
       .conviction-text { font-size: clamp(22px, 6vw, 30px); }
+      /* the two sentences run together on narrow screens */
+      .conviction-br { display: none; }
 
       /* What we do */
       .what-header { grid-template-columns: 1fr; gap: 20px; }
@@ -874,7 +882,7 @@
       .team-linkedin { padding: 9px; margin: -9px; }
     }
     @media (max-width: 500px) {
-      h1 { font-size: 38px; }
+      /* h1 size is handled by the fluid rule in the 860px block above */
       .opp-heading { font-size: 26px; }
       .streams-gallery { grid-template-columns: 1fr; }
       .streams-item { aspect-ratio: 16/9; }
@@ -992,7 +1000,7 @@
   <!-- ── CONVICTION ──────────────────────────────────── -->
   <section id="conviction">
     <span class="section-tag">Our Thesis</span>
-    <p class="conviction-text">The cheapest clean energy isn't generated.<br>It's recovered.</p>
+    <p class="conviction-text">The cheapest clean energy isn't generated. <br class="conviction-br">It's recovered.</p>
   </section>
 
   <!-- ── WHAT WE DO ───────────────────────────────────── -->
@@ -1282,7 +1290,7 @@
         ).join('');
       }
       convictionText.innerHTML =
-        charsToSpans(part1, '') + '<br>' + charsToSpans(part2, ' conviction-word--strong conviction-word--yellow');
+        charsToSpans(part1, '') + ' <br class="conviction-br">' + charsToSpans(part2, ' conviction-word--strong conviction-word--yellow');
       const wordSpans = convictionText.querySelectorAll('.conviction-word');
       if (prefersReducedMotion) wordSpans.forEach(s => s.classList.add('lit'));
 
