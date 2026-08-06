@@ -20,12 +20,12 @@
   <meta name="twitter:title" content="Inroad Energy — Clean Energy Project Developer" />
   <meta name="twitter:description" content="We develop, own and operate projects that recover the energy already being wasted inside existing infrastructure — from first site visit through financing and construction, into long-term operation." />
   <meta name="twitter:image" content="https://inroad.energy/og-image.jpg" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <style>
     /* ─── ARCHIVO — self-hosted variable font (300–700) ─── */
     @font-face {
       font-family: 'Archivo';
-      src: url('fonts/archivo-var.woff2') format('woff2');
+      src: url('/fonts/archivo-var.woff2') format('woff2');
       font-weight: 300 700;
       font-style: normal;
       font-display: swap;
@@ -370,7 +370,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: url('section-bg-blue.jpg') center 70%/cover no-repeat;
+      background: url('/section-bg-blue.jpg') center 70%/cover no-repeat;
       opacity: 0.09;
       pointer-events: none;
     }
@@ -715,7 +715,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: url('energy flow.jpg') center/cover no-repeat;
+      background: url('/energy%20flow.jpg') center/cover no-repeat;
       filter: grayscale(100%);
       opacity: 0.12;
       pointer-events: none;
@@ -937,6 +937,15 @@
       .nav-links a, .mobile-menu ul li a { padding-top: 10px; padding-bottom: 10px; }
       .team-linkedin { padding: 9px; margin: -9px; }
 
+      /* ─── HEADING LEADING (mobile) ────────────────────
+         Desktop runs 1.05–1.1, which is right for large type but too
+         tight once headings drop to phone sizes. */
+      h1, .page-header h1, .contact-inner h1, .legal-header h1,
+      .opp-heading, .what-header h2, .why-now-heading,
+      .stage-headline, .audience-heading, .streams-note,
+      .process-item-title, .philosophy-headline { line-height: 1.2; }
+
+
       /* ─── FOOTER (mobile) ─────────────────────────────
          Tighter stacking, slightly larger mark. Tap areas kept. */
       #cta { padding: 34px var(--pad-x) 28px; }
@@ -991,7 +1000,7 @@
       /* Looping hero video is replaced by its still poster */
       #hero-video { display: none; }
       #hero {
-        background: url('hero-poster.jpg') center 35%/cover no-repeat, #0f1a2e;
+        background: url('/hero-poster.jpg') center 35%/cover no-repeat, #0f1a2e;
       }
       .hero-line { opacity: 1; transform: none; }
       .streams-item { opacity: 1; transform: none; }
@@ -1007,12 +1016,12 @@
   <!-- ── NAV ─────────────────────────────────────────── -->
   <nav id="main-nav">
     <div class="nav-inner">
-      <a class="nav-logo" href="index.html"><img src="logo.png" alt="Inroad Energy" /></a>
+      <a class="nav-logo" href="/"><img src="/logo.png" alt="Inroad Energy" /></a>
       <ul class="nav-links">
-        <li><a href="what-we-do.html">What We Do</a></li>
-        <li><a href="who-we-work-with.html">Who We Work With</a></li>
-        <li><a href="about.html">Who We Are</a></li>
-        <li><a href="contact.html" class="btn-nav-cta">Contact Us <img class="btn-arrow" src="right-up.png" alt="" /></a></li>
+        <li><a href="/what-we-do/">What We Do</a></li>
+        <li><a href="/who-we-work-with/">Who We Work With</a></li>
+        <li><a href="/about/">Who We Are</a></li>
+        <li><a href="/contact/" class="btn-nav-cta">Contact Us <img class="btn-arrow" src="/right-up.png" alt="" /></a></li>
       </ul>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -1024,19 +1033,19 @@
   <div class="mobile-menu" id="mobile-menu">
     <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">✕</button>
     <ul>
-      <li><a href="what-we-do.html" class="mobile-nav-link">What We Do</a></li>
-      <li><a href="who-we-work-with.html" class="mobile-nav-link">Who We Work With</a></li>
-      <li><a href="about.html" class="mobile-nav-link">Who We Are</a></li>
+      <li><a href="/what-we-do/" class="mobile-nav-link">What We Do</a></li>
+      <li><a href="/who-we-work-with/" class="mobile-nav-link">Who We Work With</a></li>
+      <li><a href="/about/" class="mobile-nav-link">Who We Are</a></li>
     </ul>
     <div class="mobile-menu-cta">
-      <a href="contact.html" class="mobile-nav-link">Contact Us <img class="btn-arrow" src="right-up.png" alt="" style="filter:brightness(0) invert(1);width:16px;height:16px;" /></a>
+      <a href="/contact/" class="mobile-nav-link">Contact Us <img class="btn-arrow" src="/right-up.png" alt="" style="filter:brightness(0) invert(1);width:16px;height:16px;" /></a>
     </div>
   </div>
 
   <!-- ── HERO ────────────────────────────────────────── -->
   <section id="hero">
     <div class="hero-sticky">
-      <video class="hero-bg" id="hero-video" autoplay muted playsinline loop src="hero-web.mp4" poster="hero-poster.jpg"></video>
+      <video class="hero-bg" id="hero-video" autoplay muted playsinline loop src="/hero-web.mp4" poster="hero-poster.jpg"></video>
       <div class="hero-navy-overlay"></div>
       <div class="hero-scrim"></div>
       <div class="hero-content">
@@ -1112,7 +1121,7 @@
         </div>
       </div>
     </div>
-    <a href="what-we-do.html" class="what-we-do-link">What we do <img src="right-up.png" alt="" class="what-we-do-arrow" /></a>
+    <a href="/what-we-do/" class="what-we-do-link">What we do <img src="/right-up.png" alt="" class="what-we-do-arrow" /></a>
   </section>
 
   <!-- ── WHY NOW ─────────────────────────────────────── -->
@@ -1126,11 +1135,11 @@
 
   <!-- ── CLOSING CTA ──────────────────────────────────── -->
   <div id="site-cta"></div>
-  <script src="cta.js"></script>
+  <script src="/cta.js"></script>
 
   <!-- ── FOOTER ───────────────────────────────────────── -->
   <div id="site-footer"></div>
-  <script src="footer.js"></script>
+  <script src="/footer.js"></script>
 
   <script>
     // Scroll-driven text panels + energy canvas

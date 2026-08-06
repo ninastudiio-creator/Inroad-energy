@@ -291,6 +291,15 @@ a:focus-visible, button:focus-visible {
   .nav-links a, .mobile-menu ul li a { padding-top: 10px; padding-bottom: 10px; }
   .team-linkedin { padding: 9px; margin: -9px; }
 
+  /* ─── HEADING LEADING (mobile) ────────────────────
+     Desktop runs 1.05–1.1, which is right for large type but too
+     tight once headings drop to phone sizes. */
+  h1, .page-header h1, .contact-inner h1, .legal-header h1,
+  .opp-heading, .what-header h2, .why-now-heading,
+  .stage-headline, .audience-heading, .streams-note,
+  .process-item-title, .philosophy-headline { line-height: 1.2; }
+
+
   /* ─── FOOTER (mobile) ─────────────────────────────
      Tighter stacking, slightly larger mark. Tap areas kept. */
   #cta { padding: 34px var(--pad-x) 28px; }

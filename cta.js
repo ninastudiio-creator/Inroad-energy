@@ -3,7 +3,7 @@
   <div id="cta">
     <div class="cta-inner">
       <div class="cta-left">
-        <a href="contact.html" class="cta-headline-link">Let's talk <img class="cta-arrow-img" src="right-up.png" alt="" /></a>
+        <a href="/contact/" class="cta-headline-link">Let's talk <img class="cta-arrow-img" src="/right-up.png" alt="" /></a>
       </div>
       <div class="cta-right">
         <div class="cta-contact">
