@@ -322,9 +322,11 @@
       .nav-inner { padding: 0 24px; }
 
       /* Let the page breathe instead of locking to 100vh */
-      body { height: auto; min-height: 100svh; overflow: visible; }
-      .contact-wrap { min-height: calc(100svh - 150px); }
-      .contact-inner { padding: 120px var(--pad-x) 56px; gap: 18px; }
+      /* exactly one screen: the panel takes what's left after the footer,
+         its copy centres inside it, and the footer sits fully visible */
+      body { height: 100vh; height: 100dvh; overflow: hidden; }
+      .contact-wrap { flex: 1; min-height: 0; }
+      .contact-inner { padding: 96px var(--pad-x) 28px; gap: 14px; }
       .contact-inner h1 { font-size: 34px; padding-top: 0; margin-bottom: 12px; }
       .contact-inner p { font-size: 17px; line-height: 1.6; max-width: 460px; }
       .contact-cta-label { font-size: 17px; margin-bottom: 10px; }
