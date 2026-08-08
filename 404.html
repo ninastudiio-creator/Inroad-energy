@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f1a2e" />
+  <title>Page Not Found — Inroad Energy</title>
+  <meta name="description" content="This page could not be found." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/legal.css" />
+  <style>
+    .nf-body { padding: 56px var(--pad-x) 160px; max-width: calc(760px + var(--pad-x) * 2); }
+    .nf-links { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 36px; }
+    .nf-links a {
+      font-size: 15px; font-weight: 500; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--navy);
+      text-decoration: none; border-bottom: 1px solid var(--navy); padding-bottom: 4px;
+    }
+    .nf-links a:hover { color: var(--hydro); border-bottom-color: var(--hydro); }
+    @media (max-width: 768px) {
+      .nf-body { padding: 40px var(--pad-x) 100px; }
+      .nf-links { gap: 20px; }
+      .nf-links a { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="/"><img src="/logo.png" alt="Inroad Energy" /></a>
+      <ul class="nav-links">
+        <li><a href="/what-we-do/">What We Do</a></li>
+        <li><a href="/who-we-work-with/">Who We Work With</a></li>
+        <li><a href="/about/">Who We Are</a></li>
+        <li><a href="/contact/" class="btn-nav-cta">Contact Us <img class="btn-arrow" src="/right-up.png" alt="" /></a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&#10005;</button>
+    <ul>
+      <li><a href="/what-we-do/" class="mobile-nav-link">What We Do</a></li>
+      <li><a href="/who-we-work-with/" class="mobile-nav-link">Who We Work With</a></li>
+      <li><a href="/about/" class="mobile-nav-link">Who We Are</a></li>
+    </ul>
+    <div class="mobile-menu-cta">
+      <a href="/contact/" class="mobile-nav-link">Contact Us <img class="btn-arrow" src="/right-up.png" alt="" style="filter:brightness(0) invert(1);width:16px;height:16px;" /></a>
+    </div>
+  </div>
+
+  <header class="legal-header">
+    <div class="legal-eyebrow">Error 404</div>
+    <h1>This page doesn't exist.</h1>
+  </header>
+
+  <main class="legal-body nf-body">
+    <p>The link may be out of date, or the address mistyped. Everything on the site is one step away:</p>
+    <div class="nf-links">
+      <a href="/">Home</a>
+      <a href="/what-we-do/">What We Do</a>
+      <a href="/who-we-work-with/">Who We Work With</a>
+      <a href="/about/">Who We Are</a>
+      <a href="/contact/">Contact Us</a>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="/footer.js"></script>
+  <script src="/legal.js"></script>
+</body>
+</html>
