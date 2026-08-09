@@ -1071,7 +1071,13 @@
   <!-- ── HERO ────────────────────────────────────────── -->
   <section id="hero">
     <div class="hero-sticky">
-      <video class="hero-bg" id="hero-video" autoplay muted playsinline loop src="/hero-web.mp4" poster="hero-poster.jpg"></video>
+      <video class="hero-bg" id="hero-video" autoplay muted playsinline loop poster="/hero-poster.jpg">
+        <!-- Phones get a 720p cut, 4MB instead of 8.5. Cropped to portrait on a
+             phone screen the two are indistinguishable, and it is the one place
+             where the full file costs the visitor real mobile data. -->
+        <source src="/hero-mobile.mp4" media="(max-width: 768px)" type="video/mp4" />
+        <source src="/hero-web.mp4" type="video/mp4" />
+      </video>
       <div class="hero-navy-overlay"></div>
       <div class="hero-scrim"></div>
       <div class="hero-content">
