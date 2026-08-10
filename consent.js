@@ -65,7 +65,7 @@
     bar.setAttribute('role', 'region');
     bar.setAttribute('aria-label', 'Cookie consent');
     bar.innerHTML =
-      '<p>We use cookies to measure how this site is used, never to identify you. ' +
+      '<p>We use cookies to measure and improve how this site works. ' +
       '<a href="/privacy-policy/">Privacy Policy</a></p>' +
       '<div class="cookie-acts">' +
       '<button type="button" class="cookie-yes">Accept</button>' +
