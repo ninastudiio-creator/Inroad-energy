@@ -1072,9 +1072,10 @@
   <section id="hero">
     <div class="hero-sticky">
       <video class="hero-bg" id="hero-video" autoplay muted playsinline loop poster="/hero-poster.jpg">
-        <!-- Phones get a 720p cut, 4MB instead of 8.5. Cropped to portrait on a
-             phone screen the two are indistinguishable, and it is the one place
-             where the full file costs the visitor real mobile data. -->
+        <!-- Phones get a harder-compressed cut, 5.8MB instead of 8.5. It stays at
+             1920x1080: a phone crops this to portrait and then upscales it about
+             twofold, so dropping the resolution showed as visible pixelation even
+             though a still frame at CSS size looked fine. -->
         <source src="/hero-mobile.mp4" media="(max-width: 768px)" type="video/mp4" />
         <source src="/hero-web.mp4" type="video/mp4" />
       </video>
